@@ -9,5 +9,8 @@
     "watch": "nodemon --exec \"npm start\""
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.0.9"
+  }
 }
