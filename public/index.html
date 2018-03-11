@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MATH!</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+  <h1>NodeJS Task Queue</h1>
+  <p> Use the box below to generate an operation. This will be sent to the
+  server and the result will be displayed when ready </p>
+
+  <div id="newOp">
+    <h2>Create new operation</h2>
+    <form action="/action_page.php">
+      a: <input type="number" name="a" value="2"><br>
+      b: <input type="number" name="b" value="2"><br><br>
+      <input type="button" value="a+b" id="btn-sum">
+    </form>
+    <div id="result">
+    </div>
+  </div>
+
+  <div id="taskInfo">
+    <table id="taskTable">
+      <tr>
+        <th>Id</th>
+        <th>Status</th>
+      </tr>
+    </table>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+
+</html>
