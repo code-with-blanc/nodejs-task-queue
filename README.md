@@ -1,4 +1,4 @@
-#NodeJS Task Queue
+# NodeJS Task Queue
 
 Implements an express server capable of queuing tasks for delayed execution. This is useful for immediately responding an user request and trigger a task that can not be readily completed (eg. a long calculation, file processing, ...).
 

@@ -1,25 +1,23 @@
-//Mongoose model of a task
+//Mongoose model of a math operation request
 
 const {mongoose} = require('./../mongoose.js');
 
 //Create the model
-const Task = mongoose.model('Task', {
-  op_id : {    //id of the operation that originated this task
+const Task = mongoose.model('Math', {
+  id : {
     type : String,
     required : true
   },
 
-  status : {
+  a : {
     type : String,
     required : true
   },
 
-  result : {
+  b : {
     type : String,
     required : true
-  },
-
-  log : [String]   //register the history of this task (eg. created, completed)
+  }
 })
 
 // exports
