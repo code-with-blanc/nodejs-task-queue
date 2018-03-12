@@ -3,7 +3,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-const {Operation} = require('../models/math.js');
+const {Sum} = require('../models/sum.js');
 const {Task}      = require('../models/task.js');
 
 var router = express.Router();
@@ -25,17 +25,18 @@ router.get('/tasks', (req, res) => {
       })
     }
 
-    list.push({
-      id: -1,
-      status: 'fake'
-    })
-
     res.status(200).send(list)
   })
   .catch( (err) => {
     res.status(500).send(err);
   })
-})
+});
+
+router.get('/tasks/delete-all', (req, res) => {
+  Task.remove().then(() => {
+    res.status(200).send("Deleted all tasks!  o_o")
+  })
+});
 
 //
 module.exports.router = router;

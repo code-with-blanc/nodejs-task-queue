@@ -3,7 +3,7 @@
 const {mongoose} = require('./../mongoose.js');
 
 //Create the model
-const Task = mongoose.model('Math', {
+const Sum = mongoose.model('Sum', {
   id : {
     type : String,
     required : true
@@ -21,4 +21,4 @@ const Task = mongoose.model('Math', {
 })
 
 // exports
-module.exports = { Task };
+module.exports = { Sum };

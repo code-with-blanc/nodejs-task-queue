@@ -15,8 +15,7 @@ const Task = mongoose.model('Task', {
   },
 
   result : {
-    type : String,
-    required : true
+    type : String
   },
 
   log : [String]   //register the history of this task (eg. created, completed)

@@ -3,16 +3,26 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-const {Operation} = require('../models/math.js');
+const {Sum} = require('../models/sum.js');
 const {Task}      = require('../models/task.js');
 
 var router = express.Router();
 
 //Register an operation
-router.get('/math/sum', (req, res) => {
-  math = new Math(req.body);
+router.post('/math/sum', (req, res) => {
+  sum = new Sum(req.body);
 
-  math.save().then((math) => {
+  sum.save().then((doc) => { //sum created
+    task = new Task({
+      op_id : doc.id,
+      status : 'Created',
+    });
+
+    task.save().catch((e) => { throw e; })
+    return math;  //should pass math as an argument to the next then call
+  })
+  .then((math) => {
+    //respond request
     res.status(200).send(math);
   })
   .catch( (err) => {
