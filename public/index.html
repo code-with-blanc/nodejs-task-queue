@@ -24,14 +24,12 @@
     <form action="/action_page.php">
       a: <input type="number" name="a" id="sum-a"><br>
       b: <input type="number" name="b" id="sum-b"><br>
-      <br>
       <input type="button" value="a+b" id="btn-sum">
     </form>
-    <div id="result">
-    </div>
   </div>
 
   <div id="taskInfo">
+    <h2>Tasks</h2>
     <table id="taskTable">
       <tr>
         <th>Id</th>
@@ -40,6 +38,10 @@
       </tr>
     </table>
   </div>
+
+</br>
+
+  <a href="http://localhost:3000/tasks/delete-all">Delete all tasks</a>
 
   <script src="scripts.js"></script>
 </body>
