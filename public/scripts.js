@@ -51,7 +51,7 @@ request.onload = function () {
 
 $(document).ready( function(){
     var reqTasks = new XMLHttpRequest();
-
+    var reqSum = new XMLHttpRequest();
 
     reqTasks.onload = function() {
       //fetch task list
@@ -85,9 +85,24 @@ $(document).ready( function(){
     var intervalID = setInterval(function() {
       reqTasks.open('GET', 'http://localhost:3000/tasks', true);
       reqTasks.send()
-    }, 1000);
+    }, 5000);
 
+    //setup a+b button callback
     $(document).on('click', '#btn-sum', function(){
-      alert("button");
+      //create a POST request
+      reqSum.open('POST', 'http://localhost:3000/math/sum', true);
+      reqSum.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      // reqSum.onload(function() {
+      //   console.log('Sent POST to /math/sum')
+      // })
+
+      //send the POST request
+      var op = {
+        id: Math.floor(Math.random() * 1000000),
+        a: $('#sum-a').val(),
+        b: $('#sum-b').val()
+      }
+      console.log(op)
+      reqSum.send(JSON.stringify(op));
     });
 });

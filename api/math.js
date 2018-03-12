@@ -10,7 +10,12 @@ var router = express.Router();
 
 //Register an operation
 router.post('/math/sum', (req, res) => {
-  sum = new Sum(req.body);
+  try {
+    sum = new Sum(req.body);
+  } catch (e) {
+    console.log(e);
+    req.status(500).send(e);
+  }
 
   sum.save().then((doc) => { //sum created
     task = new Task({
@@ -18,12 +23,13 @@ router.post('/math/sum', (req, res) => {
       status : 'Created',
     });
 
-    task.save().catch((e) => { throw e; })
-    return math;  //should pass math as an argument to the next then call
+    task.save().catch((e) => { throw e; });
+
+    return doc;  //should pass math as an argument to the next then call
   })
-  .then((math) => {
+  .then((doc) => {
     //respond request
-    res.status(200).send(math);
+    res.status(200).send(doc);
   })
   .catch( (err) => {
     res.status(500).send(err);
