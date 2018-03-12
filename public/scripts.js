@@ -69,12 +69,13 @@ $(document).ready( function(){
         item = array[i];
 
         try {
-          id = item.id;
+          id = item.op_id;
           status = item.status;
+          result = item.result;
         } catch (e) {
           continue;
         }
-        tableHtml += `<tr><td> ${id} </td><td> ${status} </td></tr>`;
+        tableHtml += `<tr><td> ${id} </td><td> ${status} </td><td> ${result} </td></tr>`;
       }
 
       //append the html into the table element

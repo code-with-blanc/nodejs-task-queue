@@ -8,12 +8,7 @@ const {Task}      = require('../models/task.js');
 
 var router = express.Router();
 
-//Get the specified result
-router.get('/results/:id', (req, res) => {
-
-})
-
-//Get a list of all registered tasks ids and their status
+//Get all registered tasks
 router.get('/tasks', (req, res) => {
   Task.find().then( (docs) => {
     var list = [];
@@ -25,7 +20,7 @@ router.get('/tasks', (req, res) => {
       })
     }
 
-    res.status(200).send(list)
+    res.status(200).send(docs)
   })
   .catch( (err) => {
     res.status(500).send(err);

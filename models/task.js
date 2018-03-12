@@ -9,13 +9,13 @@ const Task = mongoose.model('Task', {
     required : true
   },
 
-  status : {
+  status : {      //Created, Processing, Completed
     type : String,
     required : true
   },
 
   result : {
-    type : String
+    type : Number
   },
 
   log : [String]   //register the history of this task (eg. created, completed)
