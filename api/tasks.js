@@ -3,8 +3,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-const {Sum} = require('../models/sum.js');
-const {Task}      = require('../models/task.js');
+const {Sum}  = require('../models/sum.js');
+const {Task} = require('../models/task.js');
 
 var router = express.Router();
 

@@ -42,11 +42,13 @@ const checkTasks = function() {
             .then( (taskObj) => {   //save the result
               debug(`5 : Saving task ${task.op_id} as 'Completed'`);
               task.status = 'Completed';
-              task.save();
+              t = new Task(task);
+              t.save();
             }).catch( (err) => {
               //taskFn encountered an error. Save this as a failed task.
               task.status = 'Failed';
-              task.save();
+              t = new Task(task);
+              t.save();
             });
 
             //code reaches this point as soon as taskFn is started and does
@@ -79,15 +81,25 @@ const checkTasks = function() {
 const taskFn = function(task) {
   return new Promise(function(resolve, reject) {
     debug(`T1: Entering taskFn for task ${task.op_id}`);
-    worked = true;
-    if(worked) {
-      setTimeout(() => {
-        debug(`T2: Resolving taskFn for task ${task.op_id}`);
-        resolve(task);
-      }, 2500);
-    } else {
-      reject(Error("Not worked!"));
-    }
+
+    Sum.findOne({'id' : task.op_id}).then((doc) => {
+        if(!doc) {
+          reject(Error(`Task specifies Sum id ${task.op_id} but none found.`));
+        }
+
+        try {
+          task.result = doc.a + doc.b;
+        } catch (e) { reject(e); }
+
+        //spend 2 to 7 seconds before resolving the task
+        waitMs = 2000 + (Math.random() * 5000)
+
+        setTimeout(() => {
+          debug(`T2: Resolving taskFn for task ${task.op_id}`);
+          resolve(task);
+        }, waitMs);
+    })
+    .catch((e) => { reject(e); } )
   })
 }
 
