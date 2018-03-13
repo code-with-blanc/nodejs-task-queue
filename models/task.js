@@ -9,7 +9,7 @@ const Task = mongoose.model('Task', {
     required : true
   },
 
-  status : {      //Created, Processing, Completed
+  status : {      //Created, Processing, Failed, Completed
     type : String,
     required : true
   },
