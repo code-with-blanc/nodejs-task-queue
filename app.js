@@ -10,23 +10,8 @@ var port = 3000;
 
 const {Task} = require('./models/task.js');
 
-Task.remove().then(() => {
-  t1 = new Task({
-    op_id: 1,
-    status: 'Created'
-  })
-
-  t2 = new Task({
-    op_id: 2,
-    status: 'Created'
-  })
-
-  return Promise.all([t1.save(), t2.save()])
-})
-.then(() => {
-  runner.run();
-})
-
+//runner runs the registered tasks
+runner.run();
 
 //serve the public folder
 app.use(express.static(__dirname + '/public'));

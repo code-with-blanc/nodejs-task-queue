@@ -86,7 +86,7 @@ $(document).ready( function(){
     var intervalID = setInterval(function() {
       reqTasks.open('GET', 'http://localhost:3000/tasks', true);
       reqTasks.send()
-    }, 5000);
+    }, 300);
 
     //setup a+b button callback
     $(document).on('click', '#btn-sum', function(){

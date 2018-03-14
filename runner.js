@@ -38,17 +38,17 @@ const checkTasks = function() {
           s = task.save()  //save processing status
           .then((task) => {
             debug(`3 : Begin taskFn for task ${task.op_id}`);
-            taskFn(task.toObject())  //begin process task (this is an async call)
+            taskFn(task)  //begin process task (this is an async call)
             .then( (taskObj) => {   //save the result
               debug(`5 : Saving task ${task.op_id} as 'Completed'`);
-              task.status = 'Completed';
-              t = new Task(task);
-              t.save();
+              taskObj.status = 'Completed';
+              taskObj.save();
             }).catch( (err) => {
               //taskFn encountered an error. Save this as a failed task.
               task.status = 'Failed';
-              t = new Task(task);
-              t.save();
+              console.log(`taskFn: failed at task ${task.op_id}`);
+              console.log(err.message);
+              task.save();
             });
 
             //code reaches this point as soon as taskFn is started and does
@@ -74,10 +74,10 @@ const checkTasks = function() {
     })
   }
 
-//This function is called on a new task
-//It receives the task object (NOT a mongoose document)
-//and must return the modified object (if successful)
-//or null (error processing task)
+//This Promise is called on a new task. It receives the
+//task (a mongoose document) and should resolve with the document
+//with the result and changed fields manipulated appropriately
+//The document should not be saved, this will happen outside taskFn.
 const taskFn = function(task) {
   return new Promise(function(resolve, reject) {
     debug(`T1: Entering taskFn for task ${task.op_id}`);
@@ -88,7 +88,7 @@ const taskFn = function(task) {
         }
 
         try {
-          task.result = doc.a + doc.b;
+          task.result = Number(doc.a) + Number(doc.b);
         } catch (e) { reject(e); }
 
         //spend 2 to 7 seconds before resolving the task
@@ -105,7 +105,7 @@ const taskFn = function(task) {
 
 const debug = function(msg) {
   //prints debug messages
-  if(true) { console.log(msg)}
+  if(false) { console.log(msg)}
 }
 
 //

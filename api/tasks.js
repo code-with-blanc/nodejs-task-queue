@@ -16,7 +16,8 @@ router.get('/tasks', (req, res) => {
       d = docs[i];
       list.push({
         id : d.op_id,
-        status : d.status
+        status : d.status,
+        result : d.result
       })
     }
 

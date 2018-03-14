@@ -25,11 +25,11 @@ router.post('/math/sum', (req, res) => {
 
     task.save().catch((e) => { throw e; });
 
-    return doc;  //should pass math as an argument to the next then call
+    return doc;  //should pass the sum doc as an argument to the next then call
   })
-  .then((doc) => {
+  .then((sum) => {
     //respond request
-    res.status(200).send(doc);
+    res.status(200).send(sum);
   })
   .catch( (err) => {
     res.status(500).send(err);
